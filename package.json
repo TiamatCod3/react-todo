@@ -1,9 +1,9 @@
 {
   "name": "react-todo",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
+  "homepage": "https://tiamatcod3.github.io/react-todo",
   "type": "module",
-  "homepage": "https://TiamatCod3.github.io/react-todo",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
