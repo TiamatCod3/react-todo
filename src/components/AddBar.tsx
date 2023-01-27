@@ -1,5 +1,5 @@
 import {PlusCircle} from 'phosphor-react'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react'
 import styles from './AddBar.module.css'
 
 interface AddTaskProps{
@@ -10,6 +10,7 @@ export function AddBar({onAddTask}:AddTaskProps){
     const [newTaskDescription, setNewTaskDescription] = useState('')
 
     function handleNewTaskDescriptionChange(event:ChangeEvent<HTMLInputElement>) {
+        event.target.setCustomValidity('');
         setNewTaskDescription(event.target.value)
     }
 
@@ -18,6 +19,12 @@ export function AddBar({onAddTask}:AddTaskProps){
         onAddTask(newTaskDescription)
         setNewTaskDescription('')
     }
+
+    function handleNewTaskDescriptionInvalid(event:InvalidEvent<HTMLInputElement>) {
+        event.target.setCustomValidity('Esse campo é obrigatório')
+    }
+
+    const isNewTaskEmpty = newTaskDescription.length === 0;
 
     return(
         <form 
@@ -33,8 +40,14 @@ export function AddBar({onAddTask}:AddTaskProps){
                 value = {newTaskDescription}
                 onChange={handleNewTaskDescriptionChange}
                 placeholder={"Adicione uma nova tarefa"}
+                required
+                onInvalid={handleNewTaskDescriptionInvalid}
             />
-            <input type="submit" value={"Criar"} />
+            <input 
+                type="submit" 
+                value={"Criar"} 
+                disabled={isNewTaskEmpty}
+            />
             
         </form>
     )

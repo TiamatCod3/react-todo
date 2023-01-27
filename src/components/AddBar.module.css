@@ -32,3 +32,9 @@
     border: none;
     cursor: pointer;
 }   
+
+.add-bar input[type='submit']:disabled{
+    opacity: 0.70;
+    cursor:not-allowed;
+}
+
